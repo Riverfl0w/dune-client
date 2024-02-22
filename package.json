@@ -17,9 +17,10 @@
   },
   "repository": "github:Riverfl0w/dune-client",
   "scripts": {
+    "lint": "biome ci .",
+    "test": "vitest",
     "build": "tsup",
-    "publish": "pnpm build && pnpm publish --access public",
-    "test": "vitest"
+    "publish": "pnpm lint && pnpm build && pnpm publish --access public"
   },
   "dependencies": {
     "zod": "^3.22.4"
