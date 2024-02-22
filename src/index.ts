@@ -4,7 +4,7 @@ export { default as ExecutionClient } from './clients/ExecutionClient.js';
 export { default as QueryClient } from './clients/QueryClient.js';
 
 // schemas
-export { default as CancelQueryResponse } from './schemas/CancelQueryResponse.js';
+export { default as CancelQueryResponse } from './schemas/CancelExecutionResponse.js';
 export { default as ErrorResponse } from './schemas/ErrorResponse.js';
 export { default as ExecuteQueryResponse } from './schemas/ExecuteQueryResponse.js';
 export { default as ExecutionResultResponse } from './schemas/ExecutionResultsResponse.js';

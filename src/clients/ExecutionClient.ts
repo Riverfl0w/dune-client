@@ -1,4 +1,4 @@
-import CancelExecutionResponse from '../schemas/CancelQueryResponse.js';
+import CancelExecutionResponse from '../schemas/CancelExecutionResponse.js';
 import type ExecutionResultsArgs from '../schemas/ExecutionResultsArgs.js';
 import ExecutionResultsResponse from '../schemas/ExecutionResultsResponse.js';
 import type ExecutionStatusArgs from '../schemas/ExecutionStatusArgs.js';
@@ -30,6 +30,10 @@ export default class ExecutionClient extends BaseClient {
     });
   }
 
+  /**
+   * Get the results of an execution.
+   * @see https://dune.com/docs/api/api-reference/get-results/execution-status/
+   */
   results({ execution_id }: ExecutionResultsArgs) {
     return this.call({
       method: 'GET',
