@@ -6,7 +6,10 @@ export interface CallOptions<S extends ZodSchema> extends RequestInit {
   path: string;
   searchParams?: URLSearchParams;
   schema: S;
+  delay?: number;
 }
+
+const MAX_RATE_LIMIT_DELAY = 60000;
 
 /**
  * Base client for Dune API. It handles the API key and error handling.
@@ -20,6 +23,7 @@ export default class BaseClient {
     path,
     searchParams,
     schema,
+    delay = 0,
     ...options
   }: CallOptions<S>): Promise<z.infer<S>> {
     if (searchParams) {
@@ -41,6 +45,18 @@ export default class BaseClient {
 
     const hasError = await ErrorResponse.safeParseAsync(data);
     if (hasError.success) {
+      if (hasError.data.error.match(/too many requests/)) {
+        // We are being rate limited, so we should wait and try again
+        await new Promise((resolve) => setTimeout(resolve, delay));
+
+        if (delay < MAX_RATE_LIMIT_DELAY) {
+          const newDelay = (delay + Math.floor(Math.random() * 1000)) * 2;
+          return this.call({ path, searchParams, schema, delay: newDelay, ...options });
+        }
+
+        // If we have been waiting for more than a minute, we should throw an error
+      }
+
       throw new DuneError(hasError.data.error);
     }
 
