@@ -20,7 +20,7 @@
     "lint": "biome ci .",
     "test": "vitest",
     "build": "tsup",
-    "publish": "pnpm lint && pnpm build && pnpm publish --access public"
+    "prepublish": "pnpm lint && pnpm build"
   },
   "dependencies": {
     "zod": "^3.22.4"
