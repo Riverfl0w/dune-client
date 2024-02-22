@@ -1,0 +1,37 @@
+{
+  "name": "@riverfl0w/dune-client",
+  "version": "0.1.0",
+  "keywords": ["dune", "dune-analytics", "sdk", "client", "api", "typescript"],
+  "homepage": "https://github.com/Riverfl0w/dune-client",
+  "bugs": "https://github.com/Riverfl0w/dune-client/issues",
+  "license": "MIT",
+  "author": "Mathieu Bour <mathieu@riverflow.co> (https://github.com/mathieu-bour)",
+  "files": ["dist", "src"],
+  "type": "module",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "repository": "github:Riverfl0w/dune-client",
+  "scripts": {
+    "build": "tsup",
+    "publish": "pnpm build && pnpm publish --access public",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.5.3",
+    "@tsconfig/strictest": "^2.0.3",
+    "dotenv-flow": "^4.1.0",
+    "ts-node": "^10.9.2",
+    "tsup": "^8.0.2",
+    "tsx": "^4.7.1",
+    "typescript": "^5.3.3",
+    "vitest": "^1.3.1"
+  }
+}

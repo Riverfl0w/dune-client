@@ -1,0 +1,73 @@
+{
+  "$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
+  "files": {
+    "ignoreUnknown": true,
+    "ignore": ["**/dist/**"]
+  },
+  "formatter": {
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 120
+  },
+  "organizeImports": {
+    "enabled": true
+  },
+  "javascript": {
+    "parser": {
+      "unsafeParameterDecoratorsEnabled": true
+    },
+    "formatter": {
+      "quoteStyle": "single"
+    }
+  },
+  "linter": {
+    "enabled": true,
+    "ignore": ["packages/protobuf/src/protos/worker.ts"],
+    "rules": {
+      "recommended": true,
+      "complexity": {
+        "useLiteralKeys": "off"
+      },
+      "correctness": {
+        "noNewSymbol": "error",
+        "noUndeclaredVariables": "error",
+        "noUnusedVariables": "error"
+      },
+      "style": {
+        "noRestrictedGlobals": "error",
+        "noShoutyConstants": "error",
+        "useBlockStatements": "error",
+        "useCollapsedElseIf": "error",
+        "useFragmentSyntax": "error",
+        "useShorthandArrayType": "error",
+        "useShorthandAssign": "error",
+        "useSingleCaseStatement": "error"
+      },
+      "suspicious": {
+        "noApproximativeNumericConstant": "error",
+        "noConsoleLog": "error",
+        "noEmptyInterface": "off",
+        "noMisrefactoredShorthandAssign": "error"
+      },
+      "nursery": {
+        "noDuplicateJsonKeys": "error",
+        "noGlobalAssign": "error",
+        "noInvalidUseBeforeDeclaration": "error",
+        "noMisleadingCharacterClass": "error",
+        "noThenProperty": "error",
+        "noUnusedImports": "error",
+        "noUnusedPrivateClassMembers": "error",
+        "noUselessLoneBlockStatements": "error",
+        "noUselessTernary": "error",
+        "useAwait": "error",
+        "useExportType": "error",
+        "useForOf": "error",
+        "useGroupedTypeImport": "error",
+        "useImportType": "error",
+        "useNodejsImportProtocol": "error",
+        "useNumberNamespace": "error",
+        "useShorthandFunctionType": "error"
+      }
+    }
+  }
+}
