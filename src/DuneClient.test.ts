@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import DuneClient from './DuneClient.js';
 
-describe.only('DuneClient', () => {
+describe('DuneClient', () => {
   let client: DuneClient;
 
   beforeEach(() => {
