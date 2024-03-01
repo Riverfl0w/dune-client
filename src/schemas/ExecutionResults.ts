@@ -1,7 +1,24 @@
 import { z } from 'zod';
 import ResultMetadata from './ResultMetadata.js';
 
-const ExecutionResultsResponse = z
+export type ExecutionResultsArgs = {
+  execution_id: string;
+  ignore_max_datapoints_per_request?: boolean;
+  allow_partial_results?: boolean;
+} & (
+  | {
+      limit?: number;
+      offset?: number;
+      sample_count?: never;
+    }
+  | {
+      limit?: never;
+      offset?: never;
+      sample_count?: number;
+    }
+);
+
+export const ExecutionResultsResponse = z
   .object({
     execution_id: z.string(),
     query_id: z.number(),
@@ -45,5 +62,3 @@ const ExecutionResultsResponse = z
     ]),
   );
 export type ExecutionResultResponse = z.infer<typeof ExecutionResultsResponse>;
-
-export default ExecutionResultsResponse;

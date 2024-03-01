@@ -1,7 +1,11 @@
 import { z } from 'zod';
 import ResultMetadata from './ResultMetadata.js';
 
-const ExecutionStatusResponse = z
+export type ExecutionStatusArgs = {
+  execution_id: string;
+};
+
+export const ExecutionStatusResponse = z
   .object({
     execution_id: z.string(),
     query_id: z.number(),
@@ -49,5 +53,3 @@ const ExecutionStatusResponse = z
 export type ExecutionStatusResponse = z.infer<typeof ExecutionStatusResponse>;
 
 export type ExecutionStatus = ExecutionStatusResponse['state'];
-
-export default ExecutionStatusResponse;

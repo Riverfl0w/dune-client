@@ -1,6 +1,6 @@
 {
   "name": "@riverfl0w/dune-client",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "keywords": ["dune", "dune-analytics", "sdk", "client", "api", "typescript"],
   "homepage": "https://github.com/Riverfl0w/dune-client",
   "bugs": "https://github.com/Riverfl0w/dune-client/issues",

@@ -1,6 +1,12 @@
 import { z } from 'zod';
 
-const ExecuteQueryResponse = z
+export type QueryExecuteArgs = {
+  query_id: string | number;
+  performance?: 'medium' | 'large';
+  query_parameters?: Record<string, unknown>;
+};
+
+export const QueryExecuteResponse = z
   .object({
     execution_id: z.string(),
   })
@@ -14,6 +20,4 @@ const ExecuteQueryResponse = z
       }),
     ]),
   );
-type ExecuteQueryResponse = z.infer<typeof ExecuteQueryResponse>;
-
-export default ExecuteQueryResponse;
+export type QueryExecuteResponse = z.infer<typeof QueryExecuteResponse>;

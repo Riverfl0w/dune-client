@@ -4,7 +4,7 @@ import ErrorResponse from '../schemas/ErrorResponse.js';
 
 export interface CallOptions<S extends ZodSchema> extends RequestInit {
   path: string;
-  searchParams?: URLSearchParams;
+  query?: Record<string, string | number | boolean | undefined | null>;
   schema: S;
   delay?: number;
 }
@@ -21,12 +21,19 @@ export default class BaseClient {
 
   protected async call<S extends ZodSchema>({
     path,
-    searchParams,
+    query,
     schema,
     delay = 0,
     ...options
   }: CallOptions<S>): Promise<z.infer<S>> {
-    if (searchParams) {
+    if (query) {
+      const searchParams = new URLSearchParams();
+      for (const [key, value] of Object.entries(query)) {
+        if (typeof value !== 'undefined' && value !== null) {
+          searchParams.append(key, value.toString());
+        }
+      }
+
       const search = searchParams.toString();
 
       if (search.length > 0) {
@@ -51,7 +58,7 @@ export default class BaseClient {
 
         if (delay < MAX_RATE_LIMIT_DELAY) {
           const newDelay = (delay + Math.floor(Math.random() * 1000)) * 2;
-          return this.call({ path, searchParams, schema, delay: newDelay, ...options });
+          return this.call({ path, query, schema, delay: newDelay, ...options });
         }
 
         // If we have been waiting for more than a minute, we should throw an error
@@ -60,7 +67,7 @@ export default class BaseClient {
       throw new DuneError(hasError.data.error);
     }
 
-    // console.log(`${options.method} ${path}`, data);
+    console.log(`${options.method} ${path}`, data);
     return await schema.parseAsync(data);
   }
 }

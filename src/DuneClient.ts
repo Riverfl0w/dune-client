@@ -1,6 +1,6 @@
 import ExecutionClient from './clients/ExecutionClient.js';
 import QueryClient from './clients/QueryClient.js';
-import type RefreshQueryArgs from './schemas/RefreshQueryArgs.js';
+import type { QueryRefreshArgs } from './schemas/QueryRefresh.js';
 
 /**
  * Public API client for Dune Analytics. It contains the following sub-clients:
@@ -19,10 +19,8 @@ export default class DuneClient {
   /**
    * Convenience method to refresh the results of a query.
    * It will wait for the query to finish and return the results.
-   * @param param0
-   * @returns
    */
-  async refresh({ cooldown = 500, ...args }: RefreshQueryArgs) {
+  async refresh({ cooldown = 500, limit, offset, ...args }: QueryRefreshArgs) {
     const { execution_id } = await this.query.execute(args);
 
     // Simple polling loop to wait for the query to finish
@@ -37,6 +35,6 @@ export default class DuneClient {
       break;
     }
 
-    return await this.execution.results({ execution_id });
+    return await this.execution.results({ execution_id, limit, offset });
   }
 }
